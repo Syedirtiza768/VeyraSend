@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, use } from 'react';
 
 const API = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
 
-export default function PublicBookPage({ params }: { params: { slug: string } }) {
+export default function PublicBookPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params);
   const [slots, setSlots] = useState<Array<{ startsAt: string }>>([]);
   const [email, setEmail] = useState('');
   const [msg, setMsg] = useState<string | null>(null);
@@ -12,11 +13,11 @@ export default function PublicBookPage({ params }: { params: { slug: string } })
   useEffect(() => {
     const from = new Date();
     const to = new Date(from.getTime() + 7 * 86400000);
-    fetch(`${API}/api/calendar/${params.slug}/public-slots?from=${from.toISOString()}&to=${to.toISOString()}`)
+    fetch(`${API}/api/calendar/${slug}/public-slots?from=${from.toISOString()}&to=${to.toISOString()}`)
       .then((r) => r.json())
       .then((d) => setSlots(d.slots ?? []))
       .catch(() => setSlots([]));
-  }, [params.slug]);
+  }, [slug]);
 
   async function book(startsAt: string) {
     setMsg(null);

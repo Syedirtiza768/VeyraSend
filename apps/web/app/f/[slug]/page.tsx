@@ -1,18 +1,19 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, use } from 'react';
 
 const API = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
 
-export default function PublicFunnelPage({ params }: { params: { slug: string } }) {
+export default function PublicFunnelPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params);
   const [state, setState] = useState<{ available?: boolean; page?: { name: string; content: unknown[] } } | null>(null);
 
   useEffect(() => {
-    fetch(`${API}/api/funnels/pages/${params.slug}`)
+    fetch(`${API}/api/funnels/pages/${slug}`)
       .then((r) => r.json())
       .then(setState)
       .catch(() => setState({ available: false }));
-  }, [params.slug]);
+  }, [slug]);
 
   if (!state) return <div className="card" style={{ margin: 48, padding: 24 }}>Loading…</div>;
   if (!state.available) {
