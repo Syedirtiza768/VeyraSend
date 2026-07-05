@@ -1,4 +1,4 @@
-import { getCurrentUser, serverApi } from '../../../lib/server-api';
+import { getCurrentUser, serverApi } from '../../../../lib/server-api';
 
 interface SubRow { id: string; name: string; slug: string; createdAt: string }
 

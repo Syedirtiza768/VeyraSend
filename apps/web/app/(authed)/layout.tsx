@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation';
 import { getCurrentUser } from '../../lib/server-api';
 import { SignOutButton } from '../../components/sign-out-button';
 import { NavLink } from '../../components/nav-link';
-import { ActAsBanner } from '../../components/act-as-banner';
+import { ActAsBanner } from '../components/act-as-banner';
 import { QueryProvider } from '../../components/query-provider';
 
 export default async function AuthedLayout({ children }: { children: React.ReactNode }) {
