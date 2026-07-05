@@ -1,0 +1,47 @@
+@import url('../colors_and_type.css');
+html, body { margin: 0; background: #2a2a2a; font-family: var(--enxi-font-sans); color: var(--enxi-color-ink-100); }
+* { box-sizing: border-box; }
+
+/* 1920x1080 slide; scales via JS in index */
+.slide { width: 1920px; height: 1080px; background: var(--enxi-color-bone-0); position: relative; overflow: hidden; }
+.slide-pad { padding: 96px 128px; height: 100%; display: flex; flex-direction: column; }
+
+/* footer hairline + tick */
+.slide-footer { position: absolute; left: 128px; right: 128px; bottom: 48px; display: flex; justify-content: space-between; align-items: flex-end; }
+.slide-footer .hr { position: absolute; left: 0; right: 0; top: -16px; height: 1px; background: var(--enxi-color-ink-15); }
+.tick-sig { display: inline-flex; gap: 3px; align-items: flex-end; height: 32px; }
+.tick-sig i { display:block; width: 2px; background: var(--enxi-color-ink-100); }
+.tick-sig i:nth-child(1){height:18px} .tick-sig i:nth-child(2){height:24px} .tick-sig i:nth-child(3){height:32px} .tick-sig i:nth-child(4){height:24px} .tick-sig i:nth-child(5){height:18px} .tick-sig i:nth-child(6){height:12px}
+.slide-footer .meta { font-family: var(--enxi-font-mono); font-size: 18px; color: var(--enxi-color-ink-40); }
+.slide-footer .wm { font-family: var(--enxi-font-sans); font-size: 18px; font-weight: 600; color: var(--enxi-color-ink-70); letter-spacing: -0.005em; display: flex; align-items: center; gap: 14px; }
+
+/* Title master */
+.slide-title .kicker { font-family: var(--enxi-font-mono); font-size: 22px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--enxi-color-cinnabar-600); margin-bottom: 40px; }
+.slide-title h1 { font-family: var(--enxi-font-serif-display); font-weight: 400; font-size: 128px; line-height: 1.02; letter-spacing: -0.02em; margin: 0 0 48px; max-width: 22ch; text-wrap: balance; color: var(--enxi-color-ink-100); }
+.slide-title .rule { height: 1px; background: var(--enxi-color-ink-15); margin: 24px 0 40px; max-width: 960px; }
+.slide-title .dek { font-family: var(--enxi-font-serif); font-size: 34px; line-height: 1.45; color: var(--enxi-color-ink-70); max-width: 38ch; }
+.slide-title .fact { margin-top: auto; font-family: var(--enxi-font-mono); font-size: 20px; color: var(--enxi-color-ink-40); display: flex; gap: 80px; padding-bottom: 32px; }
+.slide-title .fact b { display:block; color: var(--enxi-color-ink-70); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; font-size: 14px; margin-bottom: 6px; }
+
+/* Claim master */
+.slide-claim .eyebrow { font-family: var(--enxi-font-sans); font-size: 28px; color: var(--enxi-color-ink-70); margin-bottom: 32px; font-weight: 500; }
+.slide-claim h2 { font-family: var(--enxi-font-sans); font-weight: 600; font-size: 76px; line-height: 1.06; letter-spacing: -0.02em; margin: 0; max-width: 22ch; color: var(--enxi-color-ink-100); text-wrap: balance; }
+.slide-claim .midrule { height: 1px; background: var(--enxi-color-ink-15); margin: 60px 0 48px; }
+.slide-claim .proof { flex: 1; display: grid; grid-template-columns: 1.4fr 1fr; gap: 72px; min-height: 0; }
+.slide-claim .chart { background: var(--enxi-color-bone-1); border-radius: 12px; padding: 32px; display: flex; flex-direction: column; }
+.slide-claim .chart h4 { font-size: 20px; margin: 0 0 4px; font-weight: 600; }
+.slide-claim .chart .sub { font-family: var(--enxi-font-mono); font-size: 16px; color: var(--enxi-color-ink-40); margin-bottom: 20px; }
+.slide-claim .chart .cite { font-family: var(--enxi-font-mono); font-size: 13px; color: var(--enxi-color-ink-40); border-top: 1px solid var(--enxi-color-ink-15); padding-top: 12px; margin-top: 16px; }
+.slide-claim .chart svg { flex: 1; width: 100%; }
+.slide-claim .stats { display: flex; flex-direction: column; gap: 36px; justify-content: center; }
+.slide-claim .stat .n { font-family: var(--enxi-font-mono); font-weight: 500; font-variant-numeric: tabular-nums; font-size: 124px; line-height: 1; letter-spacing: -0.03em; color: var(--enxi-color-ink-100); }
+.slide-claim .stat .n .unit { font-size: 48px; color: var(--enxi-color-ink-40); margin-left: 12px; }
+.slide-claim .stat .n .accent { color: var(--enxi-color-cinnabar-600); }
+.slide-claim .stat .lbl { font-size: 22px; color: var(--enxi-color-ink-70); margin-top: 8px; max-width: 28ch; }
+
+/* Section master */
+.slide-section { display: flex; flex-direction: column; justify-content: center; }
+.slide-section .rule { height: 1px; background: var(--enxi-color-ink-100); margin-bottom: 48px; width: 240px; }
+.slide-section .roman { font-family: var(--enxi-font-serif-display); font-size: 80px; color: var(--enxi-color-cinnabar-600); margin-bottom: 32px; letter-spacing: -0.02em; }
+.slide-section h2 { font-family: var(--enxi-font-serif-display); font-weight: 400; font-size: 148px; line-height: 1.02; letter-spacing: -0.02em; margin: 0; max-width: 20ch; color: var(--enxi-color-ink-100); text-wrap: balance; }
+.slide-section .topic { font-family: var(--enxi-font-mono); font-size: 22px; color: var(--enxi-color-ink-40); margin-top: 48px; letter-spacing: 0.04em; }

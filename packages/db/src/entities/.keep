@@ -1,0 +1,5 @@
+# TypeORM entities
+
+No entities in Phase 0. The base entity and `TenantScoped` interface live in
+`src/base.entity.ts`. Phase 1 introduces the first concrete entities
+(`Tenant`, `User`, `Role`, …) with `tenant_id` + RLS, via migrations.

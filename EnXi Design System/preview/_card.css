@@ -1,0 +1,10 @@
+/* Shared preview-card chrome. All cards target ~700×150-400px */
+@import url('../colors_and_type.css');
+html, body { background: var(--enxi-color-bone-0); }
+body { margin: 0; padding: 20px; font-family: var(--enxi-font-sans); color: var(--enxi-color-ink-100); }
+.card { background: var(--enxi-color-bone-0); }
+.row { display: flex; gap: 12px; align-items: stretch; }
+.swatch { border-radius: 4px; border: 1px solid var(--enxi-color-ink-15); display: flex; flex-direction: column; justify-content: flex-end; padding: 10px; min-height: 72px; }
+.tok { font-family: var(--enxi-font-mono); font-size: 11px; letter-spacing: 0.04em; }
+.hex { font-family: var(--enxi-font-mono); font-size: 10px; color: var(--enxi-color-ink-70); }
+.label { font-family: var(--enxi-font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--enxi-color-ink-40); margin-bottom: 10px; }

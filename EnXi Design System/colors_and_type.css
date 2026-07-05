@@ -1,0 +1,346 @@
+/* ============================================================
+   EnXi Design System — Colors & Type
+   "Operational Calm" — warm substrate, graphite content.
+   Source of truth: source/BRAND_SYSTEM.md + source/DESIGN_SYSTEM.md
+   ============================================================ */
+
+/* ---------- Webfonts (Google Fonts substitutes) -----------
+   Söhne  → Inter (w/ tabular figures via feature flag)
+   Söhne Mono → JetBrains Mono (geometric, engineered grotesk mono)
+   Tiempos Text → Source Serif 4 (editorial transitional)
+   GT Sectra → DM Serif Display (sharp, anachronistic serif for hero use ONLY)
+   Flagged to user — supply real webfonts to replace.
+----------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&family=DM+Serif+Display&display=swap');
+
+:root {
+  /* ============ PRIMITIVE TOKENS ============ */
+
+  /* Substrate (backgrounds — warm neutrals) */
+  --enxi-color-bone-0:        #FBF9F4;  /* substrate/0 — universal background */
+  --enxi-color-bone-1:        #F4F1E9;  /* substrate/1 — sunken, quote, code */
+  --enxi-color-white:         #FFFFFF;  /* surface/0 — cards, tables */
+
+  /* Ink (text, hairlines — warm blacks/greys) */
+  --enxi-color-ink-100:       #1A1A1A;  /* primary text, not pure black */
+  --enxi-color-ink-70:        #4A4A4A;  /* secondary text, body prose */
+  --enxi-color-ink-40:        #8A8A8A;  /* metadata, timestamps, caption */
+  --enxi-color-ink-15:        #D8D4CA;  /* hairline dividers — warm */
+  --enxi-color-ink-5:         #EFEBE2;  /* faintest fill, heatmap floor */
+
+  /* Primary — Graphite Indigo (Moleskine endpaper) */
+  --enxi-color-indigo-900:    #1B2A3A;  /* headings, primary fill */
+  --enxi-color-indigo-600:    #2E4A6B;  /* interactive default */
+  --enxi-color-indigo-500:    #3B5D82;  /* hover */
+  --enxi-color-indigo-100:    #E4EAF1;  /* selected row, subtle fill */
+
+  /* Accent — Cinnabar (red-pencil annotation, <1% of pixels) */
+  --enxi-color-cinnabar-600:  #B4442C;
+  --enxi-color-cinnabar-100:  #F2DCD3;
+
+  /* Semantic (desaturated, never candy) */
+  --enxi-color-success-600:   #3F6B4E;  /* forest */
+  --enxi-color-success-50:    #E3ECE5;
+  --enxi-color-warning-600:   #A97A1E;  /* amber */
+  --enxi-color-warning-50:    #F2E9D3;
+  --enxi-color-danger-600:    #9A2F2F;  /* oxblood */
+  --enxi-color-danger-50:     #EDD7D7;
+  --enxi-color-info-600:      #3D6780;  /* slate-blue */
+  --enxi-color-info-50:       #DDE5EC;
+
+  /* Data viz — 7-color categorical, colorblind-tested */
+  --enxi-viz-slate:   #3B5D82;
+  --enxi-viz-ochre:   #A97A1E;
+  --enxi-viz-sage:    #6B8C6F;
+  --enxi-viz-clay:    #B4705A;
+  --enxi-viz-plum:    #6B4A6B;
+  --enxi-viz-teal:    #3E7773;
+  --enxi-viz-sand:    #C4A66E;
+
+  /* ============ SEMANTIC COLOR TOKENS ============ */
+  --enxi-color-substrate:            var(--enxi-color-bone-0);
+  --enxi-color-substrate-sunken:     var(--enxi-color-bone-1);
+  --enxi-color-surface:              var(--enxi-color-white);
+  --enxi-color-border-hairline:      var(--enxi-color-ink-15);
+  --enxi-color-text-primary:         var(--enxi-color-ink-100);
+  --enxi-color-text-secondary:       var(--enxi-color-ink-70);
+  --enxi-color-text-meta:            var(--enxi-color-ink-40);
+  --enxi-color-action-primary:       var(--enxi-color-indigo-900);
+  --enxi-color-action-interactive:   var(--enxi-color-indigo-600);
+  --enxi-color-focus-ring:           var(--enxi-color-cinnabar-600);
+  --enxi-color-accent:               var(--enxi-color-cinnabar-600);
+
+  /* ============ TYPE FAMILIES ============ */
+  --enxi-font-sans:    'Inter', 'Söhne', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  --enxi-font-mono:    'JetBrains Mono', 'Söhne Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --enxi-font-serif:   'Source Serif 4', 'Tiempos Text', 'Charter', 'Georgia', serif;
+  --enxi-font-hero:    'DM Serif Display', 'GT Sectra', 'Source Serif 4', Georgia, serif;
+
+  /* ============ TYPE SCALES ============ */
+  /* Product scale — 14px default body, density-optimized */
+  --enxi-type-display-xl:    32px;  --enxi-type-display-xl-lh:  40px;
+  --enxi-type-display-l:     24px;  --enxi-type-display-l-lh:   32px;
+  --enxi-type-display-m:     20px;  --enxi-type-display-m-lh:   28px;
+  --enxi-type-heading:       16px;  --enxi-type-heading-lh:     24px;
+  --enxi-type-body:          14px;  --enxi-type-body-lh:        20px;
+  --enxi-type-body-sm:       13px;  --enxi-type-body-sm-lh:     18px;
+  --enxi-type-caption:       12px;  --enxi-type-caption-lh:     16px;
+  --enxi-type-micro:         11px;  --enxi-type-micro-lh:       14px;
+
+  /* Marketing scale — 16px default, reading-optimized */
+  --enxi-mkt-hero-xl:        96px;  --enxi-mkt-hero-xl-lh:      96px;
+  --enxi-mkt-hero-l:         72px;  --enxi-mkt-hero-l-lh:       76px;
+  --enxi-mkt-display-xl:     56px;  --enxi-mkt-display-xl-lh:   64px;
+  --enxi-mkt-display-l:      44px;  --enxi-mkt-display-l-lh:    52px;
+  --enxi-mkt-h2:             32px;  --enxi-mkt-h2-lh:           40px;
+  --enxi-mkt-h3:             24px;  --enxi-mkt-h3-lh:           32px;
+  --enxi-mkt-body-lg:        18px;  --enxi-mkt-body-lg-lh:      30px;
+  --enxi-mkt-body:           16px;  --enxi-mkt-body-lh:         28px;
+  --enxi-mkt-body-sm:        14px;  --enxi-mkt-body-sm-lh:      22px;
+  --enxi-mkt-caption:        13px;  --enxi-mkt-caption-lh:      20px;
+
+  /* Weights */
+  --enxi-weight-regular: 400;
+  --enxi-weight-medium:  500;
+  --enxi-weight-semibold:600;
+  --enxi-weight-bold:    700;
+
+  /* Tracking */
+  --enxi-track-tight:   -0.02em;
+  --enxi-track-body:    -0.005em;
+  --enxi-track-caps:     0.08em;
+
+  /* ============ SPACING (6px base, 24px anchor) ============ */
+  --enxi-space-1:  2px;
+  --enxi-space-2:  4px;
+  --enxi-space-3:  6px;    /* BASE */
+  --enxi-space-4:  12px;
+  --enxi-space-5:  18px;
+  --enxi-space-6:  24px;   /* ANCHOR */
+  --enxi-space-7:  36px;
+  --enxi-space-8:  48px;
+  --enxi-space-9:  72px;
+  --enxi-space-10: 144px;
+
+  /* ============ RADII ============ */
+  --enxi-radius-none:   0;
+  --enxi-radius-input:  4px;   /* buttons, inputs — precise */
+  --enxi-radius-card:   12px;  /* cards, containers — enclosing */
+  --enxi-radius-full:   999px; /* pills, chips */
+
+  /* ============ HAIRLINES / BORDERS ============ */
+  --enxi-hairline:        1px solid var(--enxi-color-ink-15);
+  --enxi-hairline-strong: 1px solid var(--enxi-color-ink-40);
+
+  /* ============ MOTION ============ */
+  --enxi-motion-micro:     120ms;
+  --enxi-motion-component: 180ms;
+  --enxi-motion-transition:240ms;
+  --enxi-motion-marketing: 600ms;
+
+  --enxi-ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+  --enxi-ease-exit:  cubic-bezier(0.7, 0, 0.84, 0);
+
+  /* ============ LAYOUT ============ */
+  --enxi-rail-left:  248px;
+  --enxi-rail-right: 320px;
+  --enxi-topbar:     64px;
+  --enxi-content-max: 1440px;
+  --enxi-hero-max:    1680px;
+  --enxi-prose-max:   66ch;
+
+  /* ============ SHADOWS ============ */
+  /* EnXi rejects shadows almost categorically — cards use hairlines.
+     These exist only for: focus rings, floating menus/toasts. */
+  --enxi-shadow-none:  none;
+  --enxi-shadow-menu:  0 1px 2px rgba(26,26,26,0.04), 0 8px 24px rgba(26,26,26,0.08);
+  --enxi-shadow-toast: 0 2px 4px rgba(26,26,26,0.06), 0 12px 32px rgba(26,26,26,0.10);
+  --enxi-focus-ring:   0 0 0 2px var(--enxi-color-substrate), 0 0 0 4px var(--enxi-color-cinnabar-600);
+}
+
+/* ============================================================
+   SEMANTIC ELEMENT DEFAULTS
+   Apply with: <body class="enxi-product"> or <body class="enxi-marketing">
+   ============================================================ */
+
+/* shared baseline */
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--enxi-color-substrate);
+  color: var(--enxi-color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'cv11', 'ss01', 'tnum';
+}
+
+/* Tabular mono figures everywhere we display a number */
+.enxi-num,
+.enxi-tabular,
+table td.num,
+table td.amount {
+  font-family: var(--enxi-font-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1, 'lnum' 1;
+}
+
+/* ------- PRODUCT surface defaults ------- */
+body.enxi-product,
+.enxi-product {
+  font-family: var(--enxi-font-sans);
+  font-size: var(--enxi-type-body);
+  line-height: var(--enxi-type-body-lh);
+  letter-spacing: var(--enxi-track-body);
+  color: var(--enxi-color-text-primary);
+}
+
+.enxi-product h1, .enxi-product .display-xl {
+  font-family: var(--enxi-font-sans);
+  font-size: var(--enxi-type-display-xl);
+  line-height: var(--enxi-type-display-xl-lh);
+  font-weight: var(--enxi-weight-semibold);
+  letter-spacing: var(--enxi-track-tight);
+  margin: 0;
+}
+.enxi-product h2, .enxi-product .display-l {
+  font-family: var(--enxi-font-sans);
+  font-size: var(--enxi-type-display-l);
+  line-height: var(--enxi-type-display-l-lh);
+  font-weight: var(--enxi-weight-semibold);
+  letter-spacing: var(--enxi-track-tight);
+  margin: 0;
+}
+.enxi-product h3, .enxi-product .display-m {
+  font-family: var(--enxi-font-sans);
+  font-size: var(--enxi-type-display-m);
+  line-height: var(--enxi-type-display-m-lh);
+  font-weight: var(--enxi-weight-semibold);
+  margin: 0;
+}
+.enxi-product h4, .enxi-product .heading {
+  font-family: var(--enxi-font-sans);
+  font-size: var(--enxi-type-heading);
+  line-height: var(--enxi-type-heading-lh);
+  font-weight: var(--enxi-weight-semibold);
+  margin: 0;
+}
+.enxi-product .body-sm    { font-size: var(--enxi-type-body-sm); line-height: var(--enxi-type-body-sm-lh); }
+.enxi-product .caption    { font-size: var(--enxi-type-caption); line-height: var(--enxi-type-caption-lh); color: var(--enxi-color-text-meta); }
+.enxi-product .micro      {
+  font-size: var(--enxi-type-micro); line-height: var(--enxi-type-micro-lh);
+  font-weight: var(--enxi-weight-semibold);
+  letter-spacing: var(--enxi-track-caps);
+  text-transform: uppercase;
+  color: var(--enxi-color-text-meta);
+}
+
+/* ------- MARKETING surface defaults ------- */
+body.enxi-marketing,
+.enxi-marketing {
+  font-family: var(--enxi-font-sans);
+  font-size: var(--enxi-mkt-body);
+  line-height: var(--enxi-mkt-body-lh);
+  color: var(--enxi-color-text-primary);
+}
+
+.enxi-marketing h1, .enxi-marketing .hero-xl {
+  font-family: var(--enxi-font-hero);
+  font-weight: var(--enxi-weight-regular);
+  font-size: var(--enxi-mkt-hero-xl);
+  line-height: var(--enxi-mkt-hero-xl-lh);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.enxi-marketing .hero-l {
+  font-family: var(--enxi-font-hero);
+  font-weight: var(--enxi-weight-regular);
+  font-size: var(--enxi-mkt-hero-l);
+  line-height: var(--enxi-mkt-hero-l-lh);
+  margin: 0;
+}
+.enxi-marketing h2, .enxi-marketing .display-xl {
+  font-family: var(--enxi-font-sans);
+  font-size: var(--enxi-mkt-display-xl);
+  line-height: var(--enxi-mkt-display-xl-lh);
+  font-weight: var(--enxi-weight-semibold);
+  letter-spacing: var(--enxi-track-tight);
+  margin: 0;
+}
+.enxi-marketing h3 {
+  font-family: var(--enxi-font-sans);
+  font-size: var(--enxi-mkt-h2);
+  line-height: var(--enxi-mkt-h2-lh);
+  font-weight: var(--enxi-weight-semibold);
+  margin: 0;
+}
+.enxi-marketing .prose {
+  font-family: var(--enxi-font-serif);
+  font-size: var(--enxi-mkt-body-lg);
+  line-height: var(--enxi-mkt-body-lg-lh);
+  color: var(--enxi-color-text-secondary);
+  max-width: var(--enxi-prose-max);
+}
+.enxi-marketing .marginalia {
+  font-family: var(--enxi-font-mono);
+  font-size: var(--enxi-mkt-caption);
+  line-height: var(--enxi-mkt-caption-lh);
+  color: var(--enxi-color-text-meta);
+  letter-spacing: 0;
+}
+
+/* ------- Shared patterns ------- */
+.enxi-hairline { border: 0; border-top: 1px solid var(--enxi-color-border-hairline); height: 0; margin: 0; }
+.enxi-hr-full  { border: 0; border-top: 1px solid var(--enxi-color-border-hairline); }
+
+/* The Tick — 6-line ruler motif, brand's wordless signature */
+.enxi-tick {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 12px;
+}
+.enxi-tick::before,
+.enxi-tick::after,
+.enxi-tick > i {
+  content: '';
+  display: block;
+  height: 1px;
+  background: var(--enxi-color-ink-40);
+}
+/* For richer 6-tick use: <span class="enxi-tick-6"><i></i>×6</span> */
+.enxi-tick-6 {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 10px;
+}
+.enxi-tick-6 > i {
+  display: block;
+  height: 1px;
+  background: var(--enxi-color-ink-40);
+}
+.enxi-tick-6.horizontal {
+  flex-direction: row;
+  width: auto;
+  gap: 4px;
+}
+.enxi-tick-6.horizontal > i {
+  width: 1px;
+  height: 10px;
+}
+
+/* Focus ring — cinnabar, always visible on keyboard */
+*:focus-visible {
+  outline: 2px solid var(--enxi-color-cinnabar-600);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Reduced motion — absolute respect */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 80ms !important;
+    transition-duration: 80ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

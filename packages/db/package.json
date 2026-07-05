@@ -1,0 +1,38 @@
+{
+  "name": "@veyrasend/db",
+  "version": "0.0.0",
+  "private": true,
+  "type": "commonjs",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b --watch --preserveWatchOutput",
+    "typecheck": "tsc --noEmit",
+    "lint": "echo 'lint:noop'",
+    "clean": "rimraf dist .tsbuildinfo",
+    "migration:generate": "typeorm-ts-node-commonjs migration:generate -d src/data-source.ts",
+    "migration:run": "typeorm-ts-node-commonjs migration:run -d src/data-source.ts",
+    "migration:run:prod": "typeorm migration:run -d dist/data-source.js",
+    "migration:revert": "typeorm-ts-node-commonjs migration:revert -d src/data-source.ts"
+  },
+  "dependencies": {
+    "@veyrasend/config": "workspace:*",
+    "typeorm": "^0.3.20",
+    "pg": "^8.13.1",
+    "reflect-metadata": "^0.2.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "rimraf": "^6.0.1",
+    "@types/pg": "^8.11.10",
+    "ts-node": "^10.9.2",
+    "@types/node": "^22.9.0"
+  }
+}

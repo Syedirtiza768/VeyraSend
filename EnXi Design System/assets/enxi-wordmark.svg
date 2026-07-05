@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 64" width="240" height="64">
+  <rect width="240" height="64" fill="#FBF9F4"></rect>
+  <text x="0" y="48" font-family="DM Serif Display, GT Sectra, Georgia, serif" font-size="52" font-weight="400" fill="#1A1A1A" letter-spacing="-1.5">EnXi</text>
+  <rect x="155" y="42" width="80" height="1" fill="#D8D4CA"></rect>
+  <text x="155" y="58" font-family="JetBrains Mono, Söhne Mono, monospace" font-size="9" fill="#8A8A8A" letter-spacing="0.5">ERP — EST. 2019</text>
+</svg>

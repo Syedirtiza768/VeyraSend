@@ -1,0 +1,134 @@
+x-app-env: &app-env
+  NODE_ENV: development
+  DATABASE_URL: postgres://veyrasend:veyrasend@postgres:5432/veyrasend
+  REDIS_URL: redis://redis:6379
+  API_PORT: 4000
+  WEB_PORT: 3040
+  SESSION_SECRET: ${SESSION_SECRET:-veyrasend-docker-dev-session-secret-32chars-min}
+  SENDGRID_MOCK_MODE: "false"
+  SENDGRID_PARENT_API_KEY: ${SENDGRID_PARENT_API_KEY:-}
+  SENDGRID_WEBHOOK_VERIFICATION_KEY: ${SENDGRID_WEBHOOK_VERIFICATION_KEY:-}
+  INBOUND_PARSE_DOMAIN: ${INBOUND_PARSE_DOMAIN:-}
+  ENCRYPTION_KEY: ${ENCRYPTION_KEY:-}
+  DEMO_TENANT_SLUG: ${DEMO_TENANT_SLUG:-demo}
+  DEMO_OWNER_EMAIL: ${DEMO_OWNER_EMAIL:-owner@demo.veyrasend}
+  DEMO_OWNER_PASSWORD: ${DEMO_OWNER_PASSWORD:-demo-owner-password-123}
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: veyrasend
+      POSTGRES_PASSWORD: veyrasend
+      POSTGRES_DB: veyrasend
+    ports:
+      - "5435:5432"
+    volumes:
+      - ./.docker-data/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U veyrasend -d veyrasend"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "6381:6379"
+    volumes:
+      - ./.docker-data/redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  migrate:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    restart: "no"
+    working_dir: /app/packages/db
+    command: ["node", "./node_modules/typeorm/cli.js", "migration:run", "-d", "dist/data-source.js"]
+    environment:
+      <<: *app-env
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  seed:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    restart: "no"
+    working_dir: /app
+    command: ["node", "apps/api/dist/seed.js"]
+    environment:
+      <<: *app-env
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    environment:
+      <<: *app-env
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:4000/health').then((r)=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+      seed:
+        condition: service_completed_successfully
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      args:
+        NEXT_PUBLIC_API_BASE: ${NEXT_PUBLIC_API_BASE:-http://localhost:4000}
+    restart: unless-stopped
+    ports:
+      - "3040:3040"
+    environment:
+      API_BASE: http://api:4000
+      NEXT_PUBLIC_API_BASE: ${NEXT_PUBLIC_API_BASE:-http://localhost:4000}
+      PORT: 3040
+      HOSTNAME: 0.0.0.0
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3040/health').then((r)=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    depends_on:
+      api:
+        condition: service_healthy

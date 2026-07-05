@@ -1,0 +1,22 @@
+node_modules
+**/node_modules
+**/.next
+**/dist
+.turbo
+.docker-data
+.git
+.github
+*.md
+!README.md
+.env
+.env.*
+!.env.example
+!.env.docker.example
+**/*.spec.ts
+**/*.test.ts
+**/test
+**/.tsbuildinfo
+**/tsconfig.tsbuildinfo
+**/*.tsbuildinfo
+EnXi Design System
+docs
