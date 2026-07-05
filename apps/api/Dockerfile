@@ -17,6 +17,8 @@ FROM deps AS build
 RUN pnpm --filter @veyrasend/config build && \
     pnpm --filter @veyrasend/shared build && \
     pnpm --filter @veyrasend/sendgrid build && \
+    pnpm --filter @veyrasend/twilio build && \
+    pnpm --filter @veyrasend/stripe build && \
     pnpm --filter @veyrasend/db build && \
     pnpm --filter @veyrasend/api build
 
