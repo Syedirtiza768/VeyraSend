@@ -24,7 +24,7 @@ export default function PublicBookPage({ params }: { params: Promise<{ slug: str
     const r = await fetch(`${API}/api/appointments`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ calendarSlug: params.slug, contactEmail: email, startsAt }),
+      body: JSON.stringify({ calendarSlug: slug, contactEmail: email, startsAt }),
     });
     if (r.ok) setMsg('Booked!');
     else setMsg('Booking failed.');
