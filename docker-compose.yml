@@ -50,6 +50,7 @@ services:
     build:
       context: .
       dockerfile: apps/api/Dockerfile
+      network: host
     restart: "no"
     working_dir: /app/packages/db
     command: ["node", "./node_modules/typeorm/cli.js", "migration:run", "-d", "dist/data-source.js"]
@@ -63,6 +64,7 @@ services:
     build:
       context: .
       dockerfile: apps/api/Dockerfile
+      network: host
     restart: "no"
     working_dir: /app
     command: ["node", "apps/api/dist/seed.js"]
@@ -76,6 +78,7 @@ services:
     build:
       context: .
       dockerfile: apps/api/Dockerfile
+      network: host
     restart: unless-stopped
     ports:
       - "4000:4000"
